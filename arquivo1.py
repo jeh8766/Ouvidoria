@@ -4,6 +4,7 @@ while escolha != 7:
         "\n|1| Listagem das Manifestações \n|2| Listagem de Manifestações por Tipo \n|3| Criar uma nova Manifestação\n|4| Exibir quantidade de manifestações \n|5| Pesquisar uma manifestação por código \n|6| Excluir uma Manifestação pelo Código \n|7| Sair do Sistema.")
     escolha = int(input("Digite sua escolha: "))
     if escolha == 1:
+        kjj
 
     if escolha == 2:
 
