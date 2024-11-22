@@ -23,14 +23,29 @@ while escolha != 7:
         tipo = int(input("Qual tipo de manifestação deseja adicionar? "))
         descricao = input("Descreva sua manifestação: ")
         autor = input("Autor da manifestação: ")
-        adicionar(conexao, tipo, descricao, autor)
+        criarManifestacao=adicionar(conexao, tipo, descricao, autor)
+        if criarManifestacao > 0:
+            print("MANIFESTAÇÃO CRIADA COM SUCESSO.")
     elif escolha == 4:
-        quantidade(conexao)
+        quantidade=metodoQuantidade(conexao)
+        if len(quantidade) > 0:
+            print("Atualmente temos", quantidade[0][0], "manifestações")
+        else:
+            print("Não há manifestações no momento!")
     elif escolha == 5:
-        consultaCodigo(conexao)
+        codigo=int(input("Digite o código da manifestação: "))
+        pesquisa=pesquisarCodigo(conexao,codigo)
+        if len(pesquisa)>0:
+            print(pesquisa[0][1],"-",pesquisa[0][2])
+        else:
+            print("Não há manifestação com esse código")
     elif escolha == 6:
         codigoDelete = int(input("Qual o código da manifestação que deseja excluir? "))
-        delete(conexao, codigoDelete)
+        deletar=delete(conexao, codigoDelete)
+        if deletar > 0:
+            print("MANIFESTAÇÃO EXCLUÍDA COM SUCESSO.")
+        else:
+            print("NÃO HÁ MANIFESTAÇÃO COM ESSE CÓDIGO.")
     elif escolha != 7:
         print("ESCOLHA INVÁLIDA")
 
