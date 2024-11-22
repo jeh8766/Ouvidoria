@@ -39,37 +39,27 @@ def adicionar(conexao, tipo, descricao, autor):
         categoria = "sugestao"
     elif tipo == 3:
         categoria = "elogio"
-    else:
-        print("tipo inválido")
     consultaInsert = 'insert into manifestacoes(descricao,autor,categoria) values (%s,%s,%s)'
     valores = descricao, autor, categoria
     criarManifestacao = insertNoBancoDados(conexao, consultaInsert, valores)
-    if criarManifestacao > 0:
-        print("MANIFESTAÇÃO CRIADA COM SUCESSO.")
+    return criarManifestacao
 
 
-def quantidade(conexao):
+def metodoQuantidade(conexao):
     quantidade = listarBancoDados(conexao, 'select count(*) from manifestacoes')
-    if len(quantidade) > 0:
-        print("Atualmente temos", quantidade[0][0], "manifestações")
-    else:
-        print("Não há manifestações no momento!")
+    return quantidade
 
 
-def consultaCodigo(conexao):
-    quantidade = listarBancoDados(conexao, 'select count(*) from manifestacoes')
-    if len(quantidade) > 0:
-        print("Atualmente temos", quantidade[0][0], "manifestações")
-    else:
-        print("Não há manifestações no momento!")
+def pesquisarCodigo(conexao,codigo):
+    consultaCodigo = 'select * from manifestacoes where codigo=%s'
+    valor= [codigo]
+    pesquisaCodigo=listarBancoDados(conexao,consultaCodigo,valor)
+    return pesquisaCodigo
 
 
 def delete(conexao, codigoDelete):
     consultaDelete = 'delete from manifestacoes where codigo=%s'
     valorDelete = [codigoDelete]
     delete = excluirBancoDados(conexao, consultaDelete, valorDelete)
-    if delete > 0:
-        print("MANIFESTAÇÃO EXCLUÍDA COM SUCESSO.")
-    else:
-        print("NÃO HÁ MANIFESTAÇÃO COM ESSE CÓDIGO.")
+    return delete
 
