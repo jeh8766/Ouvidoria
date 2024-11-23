@@ -1,7 +1,6 @@
-from operacoesbd import *
 from metodos import *
 
-conexao = criarConexao('localhost', 'root', '172a820B.', 'ouvidoria_caseira')
+conexao = criarConexao('localhost', 'root', 'G172680.', 'ouvidoria')
 menu_principal = 0
 
 while menu_principal != 7:

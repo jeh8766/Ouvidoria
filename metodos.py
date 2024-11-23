@@ -63,3 +63,46 @@ def delete(conexao, codigoDelete):
     delete = excluirBancoDados(conexao, consultaDelete, valorDelete)
     return delete
 
+def adicionar_manifestacao(conexao):
+
+    status_manifestacoes = ['Reclamação', 'Elogio', 'Sugestão']
+
+    while True: #segundo menu para escolha de manifestação e sua adição, interrompe apenas por escolha.
+        sql = 'insert into manifestacoes(autor, descricao, categoria) values(%s,%s,%s)'
+        nome_cliente = 'anônimo'
+        mensagem = ''
+
+        print("\tQual o tipo de manifestação que deseja fazer?\n",
+              "1. Reclamação\n",
+              "2. Elogio\n",
+              "3. Sugestão\n",
+              "4. Cancelar")
+        menu_secundario = int(input("Qual deseja escolher?\n"))
+
+        if menu_secundario == 4:
+            print("Operação cancelada")
+            return
+        if menu_secundario not in [1,2,3]:
+            print("Opção escolhida inválida. Tente novamente")
+            continue
+
+        print("Deseja se identificar nessa manifestação?\n",
+              "1. Sim\n",
+              "2. Não")
+        anonimato = int(input("(1-2): "))
+
+        if anonimato not in [1,2]:
+            print("Opção escolhida inválida. Tente novamente")
+            continue
+
+        nome_cliente = input("Digite o seu nome: ") if anonimato == 1 else "anônimo"
+
+        tipo = status_manifestacoes[menu_secundario-1]
+        mensagem = input("Digite sua Mensagem: ")
+
+        valores = [nome_cliente, mensagem, tipo]
+
+        insertNoBancoDados(conexao,sql,valores)
+        print("Manifestação Cadastrada com Sucesso!")
+        return
+

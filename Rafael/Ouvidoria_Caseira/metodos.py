@@ -5,7 +5,7 @@ def adicionar_manifestacao(conexao):
     status_manifestacoes = ['Reclamação', 'Elogio', 'Sugestão']
 
     while True: #segundo menu para escolha de manifestação e sua adição, interrompe apenas por escolha.
-        sql = 'insert into manifestacao(nome_cliente, mensagem, tipo) values(%s,%s,%s)'
+        sql = 'insert into manifestacao(autor, descricao, categoria) values(%s,%s,%s)'
         nome_cliente = 'anônimo'
         mensagem = ''
 
