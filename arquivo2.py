@@ -26,13 +26,8 @@ while escolha != 7:
         opcao = int(input("Digite qual lista de manifestações deseja ver: "))
         listagemTipo(conexao,opcao)
     elif escolha == 3:
-        print("\n|1| para reclamação \n|2| para sugestão \n|3| para elogio")
-        tipo = int(input("Qual tipo de manifestação deseja adicionar? "))
-        descricao = input("Descreva sua manifestação: ")
-        autor = input("Autor da manifestação: ")
-        criarManifestacao=adicionar(conexao, tipo, descricao, autor)
-        if criarManifestacao > 0:
-            print("MANIFESTAÇÃO CRIADA COM SUCESSO.")
+        adicionar_manifestacao(conexao)
+
     elif escolha == 4:
         quantidade=metodoQuantidade(conexao)
         if len(quantidade) > 0:
@@ -55,49 +50,5 @@ while escolha != 7:
             print("NÃO HÁ MANIFESTAÇÃO COM ESSE CÓDIGO.")
     elif escolha != 7:
         print("ESCOLHA INVÁLIDA")
-
-
-        def adicionar_manifestacao(conexao):
-
-            status_manifestacoes = ['Reclamação', 'Elogio', 'Sugestão']
-
-            while True:  # segundo menu para escolha de manifestação e sua adição, interrompe apenas por escolha.
-                sql = 'insert into manifestacao(autor, descricao, categoria) values(%s,%s,%s)'
-                nome_cliente = 'anônimo'
-                mensagem = ''
-
-                print("\tQual o tipo de manifestação que deseja fazer?\n",
-                      "1. Reclamação\n",
-                      "2. Elogio\n",
-                      "3. Sugestão\n",
-                      "4. Cancelar")
-                menu_secundario = int(input("Qual deseja escolher?\n"))
-
-                if menu_secundario == 4:
-                    print("Operação cancelada")
-                    return
-                if menu_secundario not in [1, 2, 3]:
-                    print("Opção escolhida inválida. Tente novamente")
-                    continue
-
-                print("Deseja se identificar nessa manifestação?\n",
-                      "1. Sim\n",
-                      "2. Não")
-                anonimato = int(input("(1-2): "))
-
-                if anonimato not in [1, 2]:
-                    print("Opção escolhida inválida. Tente novamente")
-                    continue
-
-                nome_cliente = input("Digite o seu nome: ") if anonimato == 1 else "anônimo"
-
-                tipo = status_manifestacoes[menu_secundario - 1]
-                mensagem = input("Digite sua Mensagem: ")
-
-                valores = [nome_cliente, mensagem, tipo]
-
-                insertNoBancoDados(conexao, sql, valores)
-                print("Manifestação Cadastrada com Sucesso!")
-                return
 
 encerrarConexao(conexao)

@@ -32,17 +32,6 @@ def listagemTipo(conexao, opcao):
             print("Não há sugestão a ser exibida.")
 
 
-def adicionar(conexao, tipo, descricao, autor):
-    if tipo == 1:
-        categoria = "reclamacao"
-    elif tipo == 2:
-        categoria = "sugestao"
-    elif tipo == 3:
-        categoria = "elogio"
-    consultaInsert = 'insert into manifestacoes(descricao,autor,categoria) values (%s,%s,%s)'
-    valores = descricao, autor, categoria
-    criarManifestacao = insertNoBancoDados(conexao, consultaInsert, valores)
-    return criarManifestacao
 
 
 def metodoQuantidade(conexao):
